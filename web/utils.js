@@ -21,6 +21,7 @@ function post (url,data,callback) {
 		if(xmlhttp.readyState == 4 ){
 			if(callback){
 				callback(xmlhttp.responseText);
+				console.log("");
 			}
 		}
 	};

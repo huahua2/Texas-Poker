@@ -137,20 +137,20 @@ class Ai {
     //数据函数 begain
 
     //初始化数据 ( 底牌数据 )
-    initDiPai(){
-        this.diPai = this.stardTrueToAiArray(this.getDiPai())
+    initDiPai(array){
+        this.diPai = this.stardTrueToAiArray(array)
     }
     //初始化数据 ( 翻牌数据 )
-    initFanPai(){
-        this.fanPai = this.stardTrueToAiArray(this.getFanPai())
+    initFanPai(array){
+        this.fanPai = this.stardTrueToAiArray(array)
     }
     //初始化数据 ( 转牌数据 )
-    initZhuanPai(){
-        this.zhuanPai = this.stardTrueToAiArray(this.getZhuanPai())
+    initZhuanPai(array){
+        this.zhuanPai = this.stardTrueToAiArray(array)
     }
     //初始化数据 ( 河牌数据 )
-    initHePai(){
-        this.hePai = this.stardTrueToAiArray(this.getHePai())
+    initHePai(array){
+        this.hePai = this.stardTrueToAiArray(array)
     }
     //初始化出牌 (出牌数据 )
     initChuPai(){
