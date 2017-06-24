@@ -20,7 +20,7 @@ function post (url,data,callback) {
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState == 4 ){
 			if(callback){
-				callback(xmlhttp.status + xmlhttp.responseText);
+				callback(xmlhttp.responseText);
 			}
 		}
 	};
