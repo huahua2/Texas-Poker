@@ -125,6 +125,12 @@ var opera={
 					}
 					console.log('---------------------------'+type)
 					console.log('---------------------------'+httpBetMoney)
+                    console.log('---------------------------begain')
+                    console.log(ai.diPai)
+                    console.log(ai.fanPai)
+                    console.log(ai.zhuanPai)
+                    console.log(ai.hePai)
+                    console.log('---------------------------end')
 					opera.betting(type, httpBetMoney);
                 }
             }
@@ -133,7 +139,7 @@ var opera={
                 var status=curObj.game_status;
                 //摊牌
                 if(status==7){
-                    console.log('---------------------------')
+                    console.log('-----------摊牌----------------')
                     console.log(ai.chuPai)
                     opera.showdown(ai.chuPai);
                 }
@@ -142,7 +148,7 @@ var opera={
             else if(msgid==3){
 				ai = new Ai(['aaa', 'bbb', 'ccc'])
 				ai.initDiPai(JSON.parse(data.MsgObj).cards);
-				console.log(ai.diPai)
+				console.log(ai.aiArraytureToStard(ai.diPai))
                 // console.log("底牌："+ JSON.parse(data.MsgObj).cards);
                //取出并记录底牌
             }
@@ -158,17 +164,21 @@ var opera={
                 var fan_zhuan_he_type = JSON.parse(data.MsgObj).public_cards_type;
                 if(fan_zhuan_he_type == 1){
                 	var fanPai = JSON.parse(data.MsgObj).cards;
+                	console.log('----------ai.initFanPai-------')
 					ai.initFanPai(fanPai)
 				}else if(fan_zhuan_he_type ==2){
                     var zhuanPai = JSON.parse(data.MsgObj).cards;
+                    console.log('----------ai.initZhuanPai-------')
                     ai.initZhuanPai(zhuanPai)
 				}else if(fan_zhuan_he_type ==3){
                     var hePai = JSON.parse(data.MsgObj).cards;
+                    console.log('----------ai.initHePai-------')
                     ai.initHePai(hePai)
 				}
             }
             // 6：牌局结果
             else if(msgid==6){
+                ai = null
 				opera.reset();
             }
 
@@ -182,7 +192,7 @@ var opera={
     },
 	//摊牌
     showdown:function (array) {
-        post(url_showdown,{deskid:loginMsg.deskid,token:loginMsg.token,card1:array[0],card2:array[1],card2:array[2]},function (d) {
+        post(url_showdown,{deskid:loginMsg.deskid,token:loginMsg.token,card1:array[0],card2:array[1],card3:array[2]},function (d) {
             console.log(d);
         });
     },

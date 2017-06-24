@@ -138,18 +138,22 @@ class Ai {
 
     //初始化数据 ( 底牌数据 )
     initDiPai(array){
+        array = array.sort(this.paiSort)
         this.diPai = this.stardTrueToAiArray(array)
     }
     //初始化数据 ( 翻牌数据 )
     initFanPai(array){
+        array = array.sort(this.paiSort)
         this.fanPai = this.stardTrueToAiArray(array)
     }
     //初始化数据 ( 转牌数据 )
     initZhuanPai(array){
+        array = array.sort(this.paiSort)
         this.zhuanPai = this.stardTrueToAiArray(array)
     }
     //初始化数据 ( 河牌数据 )
     initHePai(array){
+        array = array.sort(this.paiSort)
         this.hePai = this.stardTrueToAiArray(array)
     }
     //初始化出牌 (出牌数据 )
@@ -322,7 +326,7 @@ class Ai {
             isTonghua = false;
         }
         // 两顺子  5, 9  是顺子    5，6，6，8，9
-        if( (array[0].value + 4) > array[1].value){
+        if( (array[0].value + 4) < array[1].value){
             isLiangShunzi = false;
         }
         if(isTonghua && isLiangShunzi){
@@ -350,7 +354,7 @@ class Ai {
         let isLiangShunzi = true;
         if(array.length<2) return false;
         // 两顺子  5, 9  是顺子    5，6，6，8，9
-        if( (array[0].value + 4) > array[1].value){
+        if( (array[0].value + 4) < array[1].value){
             isLiangShunzi = false;
         }
         return isLiangShunzi;
@@ -507,6 +511,20 @@ class Ai {
      */
     howMuchBet(type, celue, otherBetMoney, restMoney){
         //看了底牌
+        if(this.diPai && this.diPai.length>0){
+            type = 1;
+        }
+        if(this.fanPai && this.fanPai.length>0){
+            type =2;
+        }
+        if(this.zhuanPai && this.zhuanPai.length>0){
+            type = 3;
+        }
+        if(this.hePai && this.zhuanPai.length>0){
+            type =4
+        }
+        console.log('type type')
+        console.log(type)
         if(type ==1 ){ //看了底牌  二个
             let diPai = this.diPai
             //分析底牌大小
@@ -541,9 +559,9 @@ class Ai {
                 // type = 1  谨慎
                 // type = 1 正常(谨慎)玩法, 2激进玩法， 3 保守玩法
                 // mostMoney  阀值   比如 1000，就弃牌
-                return this.getBetMoneyByTtype(1, 100, otherBetMoney, restMoney)
+                return this.getBetMoneyByTtype(1, 800, otherBetMoney, restMoney)
             }else{
-                return 0;
+                return this.getBetMoneyByTtype(1, 300, otherBetMoney, restMoney)
             }
         }else if(type == 2){ //看了翻牌 三个
             let fanPai = this.fanPai;
@@ -617,7 +635,11 @@ class Ai {
             //转化出牌
 
             let subtractDipai = this.aiArraytureToStard(this.diPai)
+            console.log('+++++++++++++++++')
+            console.log(this.aiArraytureToStard(wuPai))
+            console.log(subtractDipai)
             this.chuPai = this.subtractArray( this.aiArraytureToStard(wuPai), subtractDipai)
+            console.log(this.chuPai)
 
             if(this.isTonghuashun(wuPai)){ //5牌 是同花顺
                 return 'allin'
