@@ -529,19 +529,19 @@ class Ai {
             else if(this.isLiangTonghuaShunzi(diPai)){  // 两个顺子加同花  概率也很小 ,就看翻牌的了
                 // type = 1 正常(谨慎)玩法, 2激进玩法， 3 保守玩法
                 // mostMoney  阀值   比如 2000，就弃牌
-                this.getBetMoneyByTtype(1, 3000, otherBetMoney, restMoney)
+                this.getBetMoneyByTtype(1, 1000, otherBetMoney, restMoney)
             }
             else if(this.isLiangShunzi(diPai)){  // 两个顺子  概率也很小 ,就看翻牌的了
                 // type = 1  谨慎
                 // type = 1 正常(谨慎)玩法, 2激进玩法， 3 保守玩法
                 // mostMoney  阀值   比如 1000，就弃牌
-                return this.getBetMoneyByTtype(1, 2000, otherBetMoney, restMoney)
+                return this.getBetMoneyByTtype(1, 800, otherBetMoney, restMoney)
             }
             else if(this.isLiangTonghua(diPai)){  // 两个同花  概率也很小 ,就看翻牌的了
                 // type = 1  谨慎
                 // type = 1 正常(谨慎)玩法, 2激进玩法， 3 保守玩法
                 // mostMoney  阀值   比如 1000，就弃牌
-                return this.getBetMoneyByTtype(1, 1000, otherBetMoney, restMoney)
+                return this.getBetMoneyByTtype(1, 100, otherBetMoney, restMoney)
             }else{
                 return 0;
             }
@@ -600,7 +600,7 @@ class Ai {
             }else if(this.isSantiao(wuPai)){ //5牌 是1对
                 // type = 1 正常(谨慎)玩法, 2激进玩法， 3 保守玩法
                 // mostMoney  阀值   比如 2000，就弃牌
-                return this.getBetMoneyByTtype(1, 2000, otherBetMoney, restMoney)
+                return this.getBetMoneyByTtype(1, 1000, otherBetMoney, restMoney)
             }else{ //5牌 是零牌
                 return 0
             }
