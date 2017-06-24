@@ -30,11 +30,12 @@ function sendRequest(url,callback) {
 
 }
 
+var msgid=1;
 /**
 *	轮询消息
 */
 exports.getmsg = function (req, resp) {
-    console.log(req.body.msgid);
+    console.log(msgid++);
     console.log(req.body.token);
 	var pollingCallback = function (newData) {
 		// var data = getRespTpl(req);

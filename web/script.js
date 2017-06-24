@@ -1,6 +1,5 @@
 
 var testStart = false; //防止多次请求
-var msgid=0; //对消息请求进行标记识别
 var loopTime=3000;//正式设置成100
 
 //桌子id 用户名 密码
@@ -62,11 +61,11 @@ function  loop() {
      * @param e 	请求返回的数据
      */
     function pollingCallback (e) {
+
         log(JSON.parse(e)[0].classurl)
     };
-
     //进行轮询，间隔时间为100s,
-    setInterval(sendDataOnce,loopTime,url_getmsg,{deskid:loginMsg.deskid,token:loginMsg.token,count:1,msgid:(msgid+1)},pollingCallback);
+    setInterval(sendDataOnce,loopTime,url_getmsg,{deskid:loginMsg.deskid,token:loginMsg.token,count:1},pollingCallback);
 
 }
 
