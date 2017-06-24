@@ -152,6 +152,21 @@ exports.showdown = function (req, resp) {
     // http://10.20.221.136/cards?deskid=120006&token=08376485079283375742305935202836&card1=43&card2=14&card3=29&callback=
     var url='http://10.20.221.136/cards?deskid='+deskid+'&token='+token+'&card1='+card1+'&card2='+card2+'&card3='+card3+'&callback=';
     sendRequest(url,Callback);
+}/**
+ *	获取用户信息
+ */
+exports.getuserinfo = function (req, resp) {
+    console.log(req.body.deskid);
+    var deskid=req.body.deskid;
+    var type=req.body.type;
+    var Callback = function (data) {
+
+        // console.log(data);
+        resp.json(data);
+    }
+    // http://10.20.221.136/cards?deskid=120006&token=08376485079283375742305935202836&card1=43&card2=14&card3=29&callback=
+    var url='http://10.20.221.136/getuinfo?deskid='+deskid+'&type='+type+'&callback=';
+    sendRequest(url,Callback);
 }
 
 

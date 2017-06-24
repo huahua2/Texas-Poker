@@ -20,6 +20,8 @@ app.post('/login', routers.login);
 app.post('/betting', routers.betting);
 //摊牌
 app.post('/showdown', routers.showdown);
+//获取用户信息
+app.post('/getuserinfo', routers.getuserinfo);
 
 
 var server = app.listen(3000, function() {
