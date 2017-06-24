@@ -547,7 +547,7 @@ class Ai {
             else if(this.isLiangTonghuaShunzi(diPai)){  // 两个顺子加同花  概率也很小 ,就看翻牌的了
                 // type = 1 正常(谨慎)玩法, 2激进玩法， 3 保守玩法
                 // mostMoney  阀值   比如 2000，就弃牌
-                this.getBetMoneyByTtype(1, 1000, otherBetMoney, restMoney)
+                return this.getBetMoneyByTtype(1, 1000, otherBetMoney, restMoney)
             }
             else if(this.isLiangShunzi(diPai)){  // 两个顺子  概率也很小 ,就看翻牌的了
                 // type = 1  谨慎
@@ -635,11 +635,7 @@ class Ai {
             //转化出牌
 
             let subtractDipai = this.aiArraytureToStard(this.diPai)
-            console.log('+++++++++++++++++')
-            console.log(this.aiArraytureToStard(wuPai))
-            console.log(subtractDipai)
             this.chuPai = this.subtractArray( this.aiArraytureToStard(wuPai), subtractDipai)
-            console.log(this.chuPai)
 
             if(this.isTonghuashun(wuPai)){ //5牌 是同花顺
                 return 'allin'
