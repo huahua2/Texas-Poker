@@ -30,20 +30,45 @@
     ]
     var ai = new Ai(array)
 
-    ai.initDiPai([36, 38])
-    var money1 = ai.howMuchBet(1,0, 800, 9000)
-    //console.log(money1)
-    ai.initFanPai([1,10,33])
-    var money2 = ai.howMuchBet(2,0, 1500, 9000)
-    //console.log(money2)
+//    ai.initDiPai([4, 6])
+//    var money1 = ai.howMuchBet(1,0, 800, 9000)
+//    //console.log(money1)
+//    ai.initFanPai([17,19,32])
+//    var money2 = ai.howMuchBet(2,0, 1500, 9000)
+//    //console.log(money2)
+//
+//    ai.initZhuanPai([13])
+//    var money3 = ai.howMuchBet(3,0, 1700, 9000)
+//    //console.log(money3)
+//
+//    ai.initHePai([12])
+//    var money4 = ai.howMuchBet(4,0, 1800, 9000)
+//    console.log(ai.initChuPai())
+//    console.log(ai.chuPai)
 
-    ai.initZhuanPai([18])
-    var money3 = ai.howMuchBet(3,0, 1700, 9000)
-    //console.log(money3)
-
-    ai.initHePai([47])
-    var money4 = ai.howMuchBet(4,0, 1800, 9000)
-    console.log(ai.initChuPai())
+    console.log(ai.isDaDui([
+        {
+            value:9,
+            huase:1
+        },
+        {
+            value:8,
+            huase:1
+        }],[
+        {
+            value:1,
+            huase:3
+        },
+        {
+            value:9,
+            huase:1
+        },
+        {
+            value:5,
+            huase:2
+        }
+        ])
+    )
 
     //    var level = ai.getPaiLevel(array)
     //    console.log(level)

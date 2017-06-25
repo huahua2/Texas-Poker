@@ -1,18 +1,7 @@
 var fetch = require('node-fetch');
 
-
 /**
-*	获取基本数据
-*/
-function getRespTpl (req) {
-	var tpl = {
-		index : req.body.index    
-	};
-	return tpl;
-}
-
-/**
-* 模拟检查新数据   
+* 公用请求函数
 * @param callback   回调函数
 */
 function sendRequest(url,callback) {
@@ -81,7 +70,7 @@ exports.getmsg = function (req, resp) {
 
             }
             console.log("桌子ID:" + deskid, "消息ID:" + message.msg_type, "消息名称:" + curstatus);
-            console.log((new Buffer(message.msg, 'base64').toString() ));
+            // console.log((new Buffer(message.msg, 'base64').toString() ));
             console.log("-----------------------------------------------------------------");
             console.log("-----------------------------------------------------------------");
             var obj = new Buffer(message.msg, 'base64').toString();

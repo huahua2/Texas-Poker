@@ -4,9 +4,9 @@ var loopTime=100;//正式设置成100
 
 //桌子id 用户名 密码
 var loginMsg = {
-    deskid: 120012,
-    player: "hehe8",
-    password: "111111",
+    deskid: 4,
+    player: "hehe",
+    password: "4sbg9s",
     token:""//登录成功后存到这里
 }
 
@@ -26,10 +26,11 @@ try{
     $("#gamestar").addEventListener("click",function (e) {
         if (testStart) return ;
         testStart = true ;
-        this.innerHTML = "polling already start";
+       var btn=this;
 
         login(function (data) {
         	var d=JSON.parse(data);
+            btn.innerHTML = "登录成功，开始轮询消息...";
             console.log("登录成功，token："+d.token);
             loginMsg.token=d.token;
             //开始轮询消息
@@ -62,12 +63,14 @@ function  loop() {
      * @param e 	请求返回的数据
      */
     function pollingCallback (d) {
-        var data=JSON.parse(d);
-		if(data.msgid){
-            opera.play(data)
-		}else{
-            // log("没有新消息")
-		}
+    	if(d) {
+            var data = JSON.parse(d);
+            if (data.msgid) {
+                opera.play(data)
+            } else {
+                // log("没有新消息")
+            }
+        }
     };
     //进行轮询，间隔时间为100s,
     setInterval(sendDataOnce,loopTime,url_getmsg,{deskid:loginMsg.deskid,token:loginMsg.token,count:1},pollingCallback);
@@ -76,7 +79,17 @@ function  loop() {
 //全局异常捕获
 window.onerror = function () {
     // 重连
-    loop();
+    if(loginMsg.token=="") {
+        login(function (data) {
+            var d = JSON.parse(data);
+            console.log("重连登录成功，token：" + d.token);
+            loginMsg.token = d.token;
+            //开始轮询消息
+            loop();
+        })
+    }else{
+        loop();
+	}
 };
 
 //存储类
@@ -168,7 +181,9 @@ var opera={
             else if(msgid==3){
 				ai = new Ai(['aaa', 'bbb', 'ccc'])
 				ai.initDiPai(JSON.parse(data.MsgObj).cards);
-				console.log(ai.aiArraytureToStard(ai.diPai))
+				// console.log()
+				var hua = ["","♦","♣","♥","♠"]
+                $("#dipai").innerHTML= hua[ai.diPai[0].huase] +""+ ai.diPai[0].value +",\r\n"+ hua[ai.diPai[1].huase] +""+ ai.diPai[1].value ;
                 // console.log("底牌："+ JSON.parse(data.MsgObj).cards);
                //取出并记录底牌
             }
