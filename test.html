@@ -7,6 +7,7 @@
     <script src="web/jquery-1.9.1.js"></script>
 <script>
     // 花色 huase  1 , 2, 3, 4
+
     var array = [
         {
         value: 9,
@@ -30,21 +31,21 @@
         },
     ]
     var ai = new Ai()
-    var dipai = [26,13]
-    var fanpai = [39,11,23]
-    var zhuanpai = [40]
-    var hepai = [42]
+    var dipai = [2, 3]
+    var fanpai = [17, 45, 3]
+    var zhuanpai = [19]
+    var hepai = [20]
     var chupai = 0
 
     ai.initDiPai(dipai)
     var money1 = ai.howMuchBet(1,0, 400, 90000)
     //console.log(money1)
     ai.initFanPai(fanpai)
-    var money2 = ai.howMuchBet(2,0, 1000, 90000)
+    var money2 = ai.howMuchBet(2,0, 500, 90000)
     //console.log(money2)
 
     ai.initZhuanPai(zhuanpai)
-    var money3 = ai.howMuchBet(3,0, 1500, 90000)
+    var money3 = ai.howMuchBet(3,0, 1000, 90000)
     //console.log(money3)
 
     ai.initHePai(hepai)
