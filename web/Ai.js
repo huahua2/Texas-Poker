@@ -418,7 +418,7 @@ class Ai {
                 }
             }
         }
-        if((array1[duizi_index].value > 10) || (array1[duizi_index].value == 1)){
+        if((array1[duizi_index].value > 10) || (array1[0].value == 1)){
             return true;
         }else{
             return false;
@@ -558,7 +558,7 @@ class Ai {
     //底牌是零牌, 是否 > 10
     isDiPaiDaUu10LingPai(array){
         array = array.sort(this.paiSort)
-        if(array[array.length-1].value > 10 || (array[array.length-1].value == 1)) {
+        if(array[array.length-1].value > 10 || (array[0].value == 1)) {
             return true;
         }else{
             return false;
@@ -699,7 +699,7 @@ class Ai {
                 if(this.isDiPaiDaUu10LingPai(diPai)){
                     return this.getBetMoneyByTtype(1, 900, otherBetMoney, restMoney)
                 }else{
-                    return this.getBetMoneyByTtype(1, 300, otherBetMoney, restMoney)
+                    return this.getBetMoneyByTtype(1, 400, otherBetMoney, restMoney)
                 }
             }
             else if(this.isLiangTonghua(diPai)){  // 两个同花  概率也很小 ,就看翻牌的了
@@ -711,14 +711,14 @@ class Ai {
                 if(this.isDiPaiDaUu10LingPai(diPai)){
                     return this.getBetMoneyByTtype(1, 700, otherBetMoney, restMoney)
                 }else{
-                    return this.getBetMoneyByTtype(1, 200, otherBetMoney, restMoney)
+                    return this.getBetMoneyByTtype(1, 300, otherBetMoney, restMoney)
                 }
             }else{
                 // this.allInCount
                 //return 'allin'
                 //零牌 > 10
                 if(this.isDiPaiDaUu10LingPai(diPai)){    //12  4
-                    return this.getBetMoneyByTtype(1, 200, otherBetMoney, restMoney)
+                    return this.getBetMoneyByTtype(1, 500, otherBetMoney, restMoney)
                 }else{// 3 8
                     return 0;
                 }
@@ -745,7 +745,11 @@ class Ai {
                 //return 'allin'
                 return this.getBetMoneyByTtype(3, 200000, otherBetMoney, restMoney)
             }else if(this.isSantiao(wuPai)){ //5牌 是3条
-                return this.getBetMoneyByTtype(3, 200000, otherBetMoney, restMoney)
+                if(this.isSantiao(fanPai)){
+                    return this.getBetMoneyByTtype(1, 1000, otherBetMoney, restMoney)
+                }else {
+                    return this.getBetMoneyByTtype(3, 200000, otherBetMoney, restMoney)
+                }
                 //return 'allin'
             }else if(this.isLiangdui(wuPai)){ //5牌 是2对
                 // type = 1 正常(谨慎)玩法, 2激进玩法， 3 保守玩法
@@ -801,7 +805,12 @@ class Ai {
                 return this.getBetMoneyByTtype(4, 800000, otherBetMoney, restMoney)
             }else if(this.isSantiao(wuPai)){ //5牌 是3条
                 //return 'allin'
-                return this.getBetMoneyByTtype(4, 30000, otherBetMoney, restMoney)
+                //return this.getBetMoneyByTtype(4, 30000, otherBetMoney, restMoney)
+                if(this.isSantiao(siPai)){
+                    return this.getBetMoneyByTtype(1, 1000, otherBetMoney, restMoney)
+                }else {
+                    return this.getBetMoneyByTtype(3, 200000, otherBetMoney, restMoney)
+                }
             }else if(this.isLiangdui(wuPai)){ //5牌 是2对
                 // type = 1 正常(谨慎)玩法, 2激进玩法， 3 保守玩法
                 // mostMoney  阀值   比如 2000，就弃牌
@@ -814,7 +823,7 @@ class Ai {
                     if(this.isDaDui(_diPai, _fanPai)){  // 大对子
                         return this.getBetMoneyByTtype(1, 6000, otherBetMoney, restMoney)
                     }else{
-                        return this.getBetMoneyByTtype(1, 2100, otherBetMoney, restMoney)
+                        return this.getBetMoneyByTtype(1, 1200, otherBetMoney, restMoney)
                     }
                 }else{
                     return this.getBetMoneyByTtype(1, 20000, otherBetMoney, restMoney)
@@ -867,7 +876,12 @@ class Ai {
                 return this.getBetMoneyByTtype(5, 800000, otherBetMoney, restMoney)
             }else if(this.isSantiao(wuPai)){ //5牌 是3条
                 //return 'allin'
-                return this.getBetMoneyByTtype(2, 40000, otherBetMoney, restMoney)
+                //return this.getBetMoneyByTtype(2, 40000, otherBetMoney, restMoney)
+                if(this.isSantiao(wuPai_waimian)){
+                    return this.getBetMoneyByTtype(1, 1000, otherBetMoney, restMoney)
+                }else {
+                    return this.getBetMoneyByTtype(3, 200000, otherBetMoney, restMoney)
+                }
             }else if(this.isLiangdui(wuPai)){ //5牌 是2对
                 // type = 1 正常(谨慎)玩法, 2激进玩法， 3 保守玩法
                 // mostMoney  阀值   比如 2000，就弃牌
@@ -888,9 +902,9 @@ class Ai {
 
                 if(this.isDuizi(wuPai_waimian)){ // 外面有一对
                     if(this.isDaDui(_diPai, _wuPai)){
-                        return this.getBetMoneyByTtype(1, 5500, otherBetMoney, restMoney)
+                        return this.getBetMoneyByTtype(2, 5500, otherBetMoney, restMoney)
                     }else{
-                        return this.getBetMoneyByTtype(1, 2200, otherBetMoney, restMoney)
+                        return this.getBetMoneyByTtype(1, 1300, otherBetMoney, restMoney)
                     }
                 }else{
                     return this.getBetMoneyByTtype(2, 10000, otherBetMoney, restMoney)
