@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>粒子旋涡</title>
     <script src="web/Ai.js"></script>
+    <script src="web/jquery-1.9.1.js"></script>
 <script>
     // 花色 huase  1 , 2, 3, 4
     var array = [
@@ -28,53 +29,105 @@
         huase: 2
         },
     ]
-    var ai = new Ai(array)
+    var ai = new Ai()
+    var dipai = [26,13]
+    var fanpai = [39,11,23]
+    var zhuanpai = [40]
+    var hepai = [42]
+    var chupai = 0
 
-//    ai.initDiPai([4, 6])
-//    var money1 = ai.howMuchBet(1,0, 800, 9000)
-//    //console.log(money1)
-//    ai.initFanPai([17,19,32])
-//    var money2 = ai.howMuchBet(2,0, 1500, 9000)
-//    //console.log(money2)
-//
-//    ai.initZhuanPai([13])
-//    var money3 = ai.howMuchBet(3,0, 1700, 9000)
-//    //console.log(money3)
-//
-//    ai.initHePai([12])
-//    var money4 = ai.howMuchBet(4,0, 1800, 9000)
-//    console.log(ai.initChuPai())
-//    console.log(ai.chuPai)
+    ai.initDiPai(dipai)
+    var money1 = ai.howMuchBet(1,0, 400, 90000)
+    //console.log(money1)
+    ai.initFanPai(fanpai)
+    var money2 = ai.howMuchBet(2,0, 1000, 90000)
+    //console.log(money2)
 
-    console.log(ai.isDaDui([
-        {
-            value:9,
-            huase:1
-        },
-        {
-            value:8,
-            huase:1
-        }],[
-        {
-            value:1,
-            huase:3
-        },
-        {
-            value:9,
-            huase:1
-        },
-        {
-            value:5,
-            huase:2
-        }
-        ])
-    )
+    ai.initZhuanPai(zhuanpai)
+    var money3 = ai.howMuchBet(3,0, 1500, 90000)
+    //console.log(money3)
+
+    ai.initHePai(hepai)
+    var money4 = ai.howMuchBet(4,0, 1600, 90000)
+    ai.initChuPai()
+    chupai = ai.chuPai
+    console.log(ai.chuPai)
+
+
+//    console.log(ai.isDaDui([
+//        {
+//            value:9,
+//            huase:1
+//        },
+//        {
+//            value:8,
+//            huase:1
+//        }],[
+//        {
+//            value:1,
+//            huase:3
+//        },
+//        {
+//            value:9,
+//            huase:1
+//        },
+//        {
+//            value:5,
+//            huase:2
+//        }
+//        ])
+//    )
 
     //    var level = ai.getPaiLevel(array)
     //    console.log(level)
+
+
 </script>
 </head>
 <body>
+    <div id="dipai"></div>
+    <div id="dipai-xiazhu"></div>
+    <div id="fanpai"></div>
+    <div id="fanpai-xiazhu"></div>
+    <div id="zhuanpai"></div>
+    <div id="zhuanpai-xiazhu"></div>
+    <div id="hepai"></div>
+    <div id="hepai-xiazhu"></div>
+    <div id="chupai"></div>
+    <div id="chupai_last"></div>
 
+
+<script>
+    $(function(){
+        var hua = [
+            "",
+            "♦",
+            "♣",
+            "♥",
+            "♠"
+        ]
+        console.log(ai.stardTrueToAiArray(fanpai))
+        var dipai_ai = ai.stardTrueToAiArray(dipai);
+        var fanpai_ai = ai.stardTrueToAiArray(fanpai);
+        var zhuanpai_ai = ai.stardTrueToAiArray(zhuanpai);
+        var hepai_ai = ai.stardTrueToAiArray(hepai);
+        var chupai_ai = ai.stardTrueToAiArray(chupai);
+        $('#dipai').text("底牌:" + hua[dipai_ai[0].huase] + dipai_ai[0].value+"," +hua[dipai_ai[1].huase] + dipai_ai[1].value + '----'+dipai)
+        $('#fanpai').text( "翻牌:" + hua[fanpai_ai[0].huase] + fanpai_ai[0].value +','+ hua[fanpai_ai[1].huase] +
+            fanpai_ai[1].value +','+ hua[fanpai_ai[2].huase] + fanpai_ai[2].value +'--------'+ fanpai)
+        $('#zhuanpai').text( "转牌:" + hua[zhuanpai_ai[0].huase] + zhuanpai_ai[0].value +'-----'+zhuanpai)
+        $('#hepai').text(  "河牌:" + hua[hepai_ai[0].huase] + hepai_ai[0].value +'------'+hepai)
+        $('#chupai').text( "出牌:(底牌：" + hua[dipai_ai[0].huase] + dipai_ai[0].value+"," +hua[dipai_ai[1].huase] + dipai_ai[1].value+
+            ',选牌:'+ hua[chupai_ai[0].huase] + chupai_ai[0].value +',' +
+            ''+ hua[chupai_ai[1].huase] + chupai_ai[1].value+','+ hua[chupai_ai[2].huase] + chupai_ai[2].value +')--------'+dipai+':'+chupai)
+
+        $('#dipai-xiazhu').text(money1)
+        $('#fanpai-xiazhu').text(money2)
+        $('#zhuanpai-xiazhu').text(money3)
+        $('#hepai-xiazhu').text(money4)
+        $('#chupai_last').text( "最后出牌:" + chupai )
+    })
+
+</script>
 </body>
 </html>
