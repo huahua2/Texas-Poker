@@ -4,7 +4,7 @@ var loopTime=100;//正式设置成100
 
 //桌子id 用户名 密码
 var loginMsg = {
-    deskid: 4,
+    deskid: 20008,
     player: "hehe",
     password: "4sbg9s",
     token:""//登录成功后存到这里
@@ -29,19 +29,23 @@ try{
        var btn=this;
 
         login(function (data) {
-        	var d=JSON.parse(data);
-            btn.innerHTML = "登录成功，开始轮询消息...";
-            console.log("登录成功，token："+d.token);
-            loginMsg.token=d.token;
-            //开始轮询消息
-			loop();
+        	if(data) {
+                var d = JSON.parse(data);
+                btn.innerHTML = "登录成功，开始轮询消息...";
+                console.log("登录成功，token：" + d.token);
+                loginMsg.token = d.token;
+                //开始轮询消息
+                loop();
+            }else{
+        		log("登录异常...");
+			}
         })
 
     });
 
 
 }
-catch(e){}
+catch(e){log("登录异常...");}
 
 /**
 * 发送测试数据
@@ -81,11 +85,15 @@ window.onerror = function () {
     // 重连
     if(loginMsg.token=="") {
         login(function (data) {
-            var d = JSON.parse(data);
-            console.log("重连登录成功，token：" + d.token);
-            loginMsg.token = d.token;
-            //开始轮询消息
-            loop();
+        	if(data) {
+                var d = JSON.parse(data);
+                log("重连登录成功，token：" + d.token);
+                loginMsg.token = d.token;
+                //开始轮询消息
+                loop();
+            }else{
+        		log("重连登录异常...");
+			}
         })
     }else{
         loop();
